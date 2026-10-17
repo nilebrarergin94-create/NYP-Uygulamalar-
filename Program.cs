@@ -1,35 +1,30 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
-bool oduncte = false;
-
-if (oduncte)
+List<string> numaralar = new List<string>
 {
-    Console.WriteLine("Ekipman ödünçte.");
-}
-else
-{
-    int gun;
-    bool gecerliMi = false;
+    "LAB1",
+    "LAB2",
+    "LAB3"
+};
 
-    do
+Console.Write("Aramak istediğiniz numarayı girin: ");
+string? aranan = Console.ReadLine();
+
+bool bulundu = NumaraVarMi(numaralar, aranan ?? "");
+
+Console.WriteLine(bulundu ? "Numara bulundu." : "Numara bulunamadı.");
+
+static bool NumaraVarMi(List<string> liste, string aranan)
+{
+    foreach (string numara in liste)
     {
-        Console.Write("Kaç günlüğüne ödünç almak istiyorsunuz? ");
-        string giris = Console.ReadLine();
-
-        if (int.TryParse(giris, out gun) && gun >= 1 && gun <= 7)
+        if (numara == aranan)
         {
-            gecerliMi = true;
-            Console.WriteLine($"Talep uygun! Ödünç süresi: {gun} gün.");
+            return true;
         }
-        else
-        {
-            Console.WriteLine("1 ile 7 arasında bir sayı girin.");
-        }
+    }
 
-    } while (!gecerliMi);
+    return false;
 }
-
-Console.WriteLine("Program sona erdi.");
-Console.ReadKey();
-
